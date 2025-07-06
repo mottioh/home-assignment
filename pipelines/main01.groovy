@@ -13,7 +13,7 @@ pipelineJob('Build-Tag-Push') {
                     branches('*/main')
                 }
             }
-            scriptPath('home-assignment/pipelines/btp.groovy')
+            scriptPath('pipelines/btp.groovy')
         }
     }
     description('Builds Tag and push reg list Docker to Docker Hub')

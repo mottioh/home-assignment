@@ -16,7 +16,7 @@ pipeline {
                         passwordVariable: 'PASSWORD'
                     )]) {
                         sh "docker login -u $USER -p $PASSWORD"
-                        sh "docker build -t ${imageTag} ./reg-list"
+                        sh "docker build -t ${imageTag} python/"
                         sh "docker push ${imageTag}"
                     }
                 }
