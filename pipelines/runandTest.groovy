@@ -50,4 +50,13 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            sh """
+                docker rm -f docker-list || true
+                docker rm -f nginx-proxy || true
+                docker network rm ${NETWORK} || true
+            """
+        }
+    }
 }
