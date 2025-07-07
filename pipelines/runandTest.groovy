@@ -30,7 +30,7 @@ pipeline {
                     sh """
                         docker run -d --rm \
                         --network ${NETWORK_NAME} \
-                        -p 8080:80 \
+                        -p 9090:80 \
                         --name nginx-proxy \
                         ${NGINX_IMAGE}
                     """
