@@ -41,23 +41,13 @@ pipeline {
             steps {
                 script {
                     sleep(time: 5, unit: "SECONDS") // Give containers time to start
-                    def response = sh (script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:5000/", returnStdout: true).trim()
+                    def response = sh (script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:9090/", returnStdout: true).trim()
                     echo "HTTP Response Code: ${response}"
                     if (response != "200") {
                         error("Request failed! Nginx or Flask not working as expected.")
                     }
                 }
             }
-        }
-    }
-    //Cleanup docker container. ||true - Don't fail the pipleline if the docker doesn't exist
-    post {
-        always {
-            sh """
-                docker rm -f docker-list || true
-                docker rm -f nginx-proxy || true
-                docker network rm ${NETWORK_NAME} || true
-            """
         }
     }
 }
