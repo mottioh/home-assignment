@@ -1,0 +1,14 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: flask-cpu-scaledobject
+spec:
+  scaleTargetRef:
+    name: flask-app        # This must match your Deployment name
+  minReplicaCount: 1
+  maxReplicaCount: 5
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "50"           # Target CPU utilization percentage (50%)
