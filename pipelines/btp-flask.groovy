@@ -4,12 +4,10 @@ pipeline {
         IMAGE_NAME = 'mottioh/docker-list'
     }
     stages {
-        stage('Build Tag and Push') {
+        stage('Build Tag and Push Flask') {
             steps {
                 script {
-                    // Get last 4 characters of Git commit hash, it will be out image tag ver
-                    def commit = sh(script: "git rev-parse --short=4 HEAD", returnStdout: true).trim()
-                    def imageTag = "${IMAGE_NAME}:${commit}"
+                    def imageTag = "${IMAGE_NAME}"
                     withCredentials([usernamePassword(
                         credentialsId: 'dockerhub-creds',
                         usernameVariable: 'USER',
